@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Local Weather APP</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=iG47Zx91gB2HTPU1KlPViWaaqyTCAxgw"></script>
+    <script src="jquery-1.10.2.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url("http://read.html5.qq.com/image?src=share&imageUrl=http://s.cimg.163.com/i/img1.3lian.com/2015/a1/27/d/169.jpg.0x0.auto.jpg") no-repeat fixed 50% 58%;
+            width: 100%;
+            background-size: cover;
+            z-index: -1;
+        }
+        .AreaZoe {
+            position: relative;
+            width: 100%;
+            /*position: fixed;*/
+            top: 0;
+            left: 0;
+        }
+        .titleZoe {
+            position: relative;
+            margin: 10% auto 0;
+            width: 30%;
+            height:auto!important;
+            min-height:100px;
+            height:100px;
+            border-radius: 30px;
+            background-color: rgba(51, 51, 51, 0.5);
+            font-weight: 700;
+            font-size: 3vw;
+            text-align: center;
+            line-height: 100px;
+            color: #fff;
+        }
+        .infoZoe {
+            position: relative;
+            margin: 3% auto 0;
+            width: 30%;
+            height:auto!important;
+            min-height:180px;
+            height:180px;
+            border-radius: 30px;
+            background-color: rgba(51, 51, 51, 0.5);
+        }
+        .infoZoeLeft {
+            float: left;
+            width: 50%;
+            height: 100%;
+        }
+        .infoZoeLeft .temp {
+            color: #fff;
+            float: left;
+            width: 100%;
+            font-size: 7vw;
+            text-align: center;
+            line-height: 180px;
+        }
+        .infoZoeRight {
+            float: right;
+            width: 50%;
+            height: 100%;
+        }
+        .infoZoeRight .tempZoe {
+            color: #fff;
+            float: right;
+            width: 100%;
+            font-size: 5vw;
+            text-align: left;
+            line-height: 90px;
+        }
+        .infoZoeRight .tempZoe b {
+            color: #d58512;
+        }
+        .infoZoeRight .positZoe {
+            width: 100%;
+            color: #fff;
+            float: right;
+            font-size: 1vw;
+            text-align: left;
+            line-height: 30px;
+        }
+        .infoZoeRight .windZoe {
+            width: 100%;
+            color: #fff;
+            float: right;
+            font-size: 1vw;
+            text-align: left;
+            line-height: 30px;
+        }
+        .infoZoeRight .humidZoe {
+            width: 100%;
+            color: #fff;
+            float: right;
+            font-size: 1vw;
+            text-align: left;
+            line-height: 30px;
+        }
+    </style>
+</head>
+<body>
+<div id="allmap"></div>
+<div class="AreaZoe">
+    <div class="titleZoe"> Local Weather App</div>
+    <div class="infoZoe">
+        <div class="infoZoeLeft">
+            <div id="temp" class="temp">
+            </div>
+        </div>
+        <div class="infoZoeRight">
+            <span class="tempZoe">°<b>C</b></span>
+            <span class="positZoe"></span>
+            <span class="windZoe">Wind:&nbsp&nbsp&nbsp</span>
+            <span class="humidZoe">Humidity:&nbsp&nbsp</span>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    var map = new BMap.Map("allmap");
+    function myFun(result) {
+        var cityName = result.name;
+        map.setCenter(cityName);
+        var city_name = cityName.slice(0, 2);
+        $(".positZoe").append(city_name);
+        $.ajax({
+            url: 'https://api.shenjian.io/?appid=7767aa5e4e2184174d77e0a855b437bc',
+            type: 'get',
+            dataType: 'jsonp',
+            data: {
+                city_name: city_name,
+            },
+            success: function (data) {
+                console.log(data.data.now[0].now_wind_power);
+                $("#temp").append(data.data.now[0].now_feelst.split("℃").join(""));
+                $(".humidZoe").append(data.data.now[0].now_humidity);
+                $(".windZoe").append(data.data.now[0].now_wind_power);
+            }
+        });
+    }
+    var myCity = new BMap.LocalCity();
+    myCity.get(myFun);
+</script>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <meta charset="UTF-8">
+    <title>time</title>
+    <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="bootstrap.css" rel="stylesheet">
+
+    <!-- 可选的Bootstrap主题文件（一般不使用） -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="jquery-1.10.2.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="bootstrap.min.js"></script>
+    <style>
+        #page-wrapper {
+            position: relative;
+            width: 100%;
+            height: 635px;
+            margin: 0;
+            padding: 0;
+            background-color: #a94442;
+        }
+
+        .container {
+            min-height: 200px;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        .btnZdy {
+            position: absolute;
+            color: #fff;
+            border: 0;
+            height: 35px;
+            border-radius: 5px;
+            bottom: 20px;
+            margin: 20px 0 0 295px;
+            background-color: #a94442;
+        }
+        a:hover{
+            underline: none;
+        }
+        .btnGroup {
+            float: bottom;
+        }
+        .btnT {
+            position: absolute;
+            color: #fff;
+            border: 0;
+            font-weight: bolder;
+            height: 35px;
+            border-radius: 5px;
+            margin: 20px 10px 0 0;
+            bottom: 20px;
+            line-height: 35px;
+            background-color: #a94442;
+        }
+
+        .btnB {
+            position: absolute;
+            color: #fff;
+            border: 0;
+            font-weight: bolder;
+            height: 35px;
+            border-radius: 5px;
+            margin: 20px 0 0 45px;
+            bottom: 20px;
+            background-color: #a94442;
+        }
+
+        button {
+            outline: none;
+        }
+
+        .BD {
+            font-size: 30px;
+            float: left;
+            font-weight: bold;
+            line-height: 27px;
+        }
+
+        .WZ {
+            position: relative;
+            font-size: 27px;
+            text-align: center;
+            margin: 0 0 20px 0;
+            color: #a94442;
+        }
+
+        .sorce {
+            font-size: 18px;
+            font-weight: lighter;
+            float: right;
+            margin: 0 0 55px 0;
+            color: #a94442;
+        }
+
+        .zoe {
+            position: relative;
+            text-align: center;
+            color: #fff;
+            margin: 10px 0 0 0;
+        }
+    </style>
+</head>
+<body>
+<div id="page-wrapper">
+    <div class="col-md-12">
+        <div class="row" style="margin: 15% 0 0 0">
+            <div class="col-md-4"></div>
+            <div class="container col-md-4">
+                <div>
+                    <span class="BD"></span>
+                    <p class="WZ">“There are no facts, only interpretations.</p>
+                    <span class="sorce">-Friedrich Nietzsche</span>
+                </div>
+                <div class="btnGroup">
+                    <a class="btnT col-md-1" target="_blank"
+                       href="http://service.weibo.com/share/share.php?url=http%3A%2F%2Flocalhost%3A63342%2Flucky%2F%25E5%2580%2592%25E8%25AE%25A1%25E6%2597%25B6.html%3F_ijt%3D2fadlanvsc7ep4f9h4f52b2g7c&type=button&language=zh_cn&searchPic=true&style=number">
+                       T
+                    </a>
+                    <button class="btnB col-md-1">B</button>
+                    <button class="btnZdy col-md-3">New Quote</button>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <p class="col-md-12 zoe">by Zoeooo</p>
+
+    </div>
+</div>
+</body>
+<script>
+
+    var data = [
+        {
+            "text": "There are no facts, only interpretations.",
+            "name": "Friedrich Nietzsche"
+        },
+        {
+            "text": "Against stupidity, the gods themselves contend in vain.",
+            "name": "Friedrich von Schiller"
+        },
+        {
+            "text": "You've got to ask yourself one question: 'Do I feel lucky?' Well, do ya, punk?",
+            "name": "Dirty Harry"
+        },
+        {
+            "text": "Wait a minute, wait a minute. You ain't heard nothin' yet!",
+            "name": "The Jazz Singer"
+        },
+        {
+            "text": "Gentlemen, you can't fight in here! This is the War Room!",
+            "name": "Dr. Strangelove"
+        },
+        {
+            "text": "An inconvenience is only an adventure wrongly considered; an adventure is an inconvenience rightly considered.",
+            "name": "Gilbert Keith Chesterton"
+        },
+        {
+            "text": "The optimist proclaims that we live in the best of all possible worlds, and the pessimist fears this is true.",
+            "name": "James Branch Cabell"
+        },
+        {
+            "text": "Forget it, Jake, it's Chinatown.",
+            "name": "Chinatown"
+        },
+        {
+            "text": "Tell 'em to go out there with all they got and win just one for the Gipper.",
+            "name": "Knute Rockne All American"
+        },
+        {
+            "text": "God is a comedian playing to an audience too afraid to laugh.",
+            "name": "Voltaire"
+        }
+    ];
+
+    function randomColor1() {
+        var r = Math.floor(Math.random() * 255);
+        var g = Math.floor(Math.random() * 255);
+        var b = Math.floor(Math.random() * 255);
+
+        if (r < 16) {
+            r = "0" + r.toString(16);
+        } else {
+            r = r.toString(16);
+        }
+        if (g < 16) {
+            g = "0" + g.toString(16);
+        } else {
+            g = g.toString(16);
+        }
+        if (b < 16) {
+            b = "0" + b.toString(16);
+        } else {
+            b = b.toString(16);
+        }
+
+        return "#" + r + g + b;
+    }
+
+    $(document).ready(function () {
+        $(".btnZdy").click(function () {
+            var T = Math.floor(Math.random() * 10);
+            var text = data[T].text;
+            var name = data[T].name;
+            var colorG = randomColor1();
+            $(" #page-wrapper").css({
+                "background-color": colorG,
+                "transition": "background-color 1s"
+            });
+            $(".btnZdy").css({
+                "background-color": colorG,
+                "transition": "background-color 1s"
+            });
+
+            $(".btnT").css({
+                "background-color": colorG,
+                "transition": "background-color 1s"
+            });
+            $(".btnB").css({
+                "background-color": colorG,
+                "transition": "background-color 1s"
+            });
+            $(".iconZdy").css({
+                "background-color": colorG,
+                "transition": "background-color 1s"
+            });
+            $(".WZ").css({
+                "color": colorG,
+                "transition": "color 1s"
+            });
+            $(".sorce").css({
+                "color": colorG,
+                "transition": "color 1s"
+            });
+            $(".BD").css({
+                "color": colorG,
+                "transition": "color 1s"
+            });
+            $(".WZ").text(text);
+            $(".sorce").text("—" + name);
+            $(".BD").text("“");
+        });
+
+    });
+
+</script>
+</html>

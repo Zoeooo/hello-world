@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baidu Viewer</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
+            background-color: #092B40;
+        }
+        input {
+            outline: none;
+        }
+        .searchBox {
+            position: relative;
+            width: 300px;
+            height: 100px;
+            margin: 20% auto 0;
+        }
+        .infoBox {
+            position: relative;
+            /*border: 1px red solid;*/
+            width: 800px;
+            min-height: 450px;
+            margin: 0 auto 0;
+        }
+        .search {
+            position: absolute;
+            padding: 0 5%;
+            border: 3px #D96F32 solid;
+            background-color: rgba(0, 0, 0, 0);
+            width: 36px;
+            margin: 0 0 0 131px;
+            height: 36px;
+            border-radius: 18px;
+            color: #fff;
+            animation: iNp ease-in-out 2s;
+            -webkit-animation: iNp ease-in-out 2s;
+        }
+        .close_1 {
+            position: absolute;
+            width: 15px;
+            height: 3px;
+            border-radius: 2px;
+            background-color: #D96F32;
+            transform: rotate(45deg);
+            top: 10px;
+            left: 300px;
+        }
+        .close_2 {
+            position: absolute;
+            width: 15px;
+            height: 3px;
+            border-radius: 2px;
+            background-color: #D96F32;
+            transform: rotate(-45deg);
+            top: -10px;
+            left: 300px;
+        }
+        .close_3 {
+            position: absolute;
+            width: 12px;
+            height: 3px;
+            border-radius: 2px;
+            background-color: #D96F32;
+            transform: rotate(30deg);
+            top: 30px;
+            left: 160px;
+        }
+        .searchBox p {
+            position: absolute;
+            color: #fff;
+            font-size: 1.3vw;
+            margin: 0;
+            top: 50px;
+            left: 70px;
+        }
+        .infoBox ul{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .infoList{
+            background-color: rgba(241,241,241,0.7);
+            border-left:  #092B40 5px solid;
+            margin: 1.5% auto 0;
+            padding: 0;
+            width: 700px;
+            min-height: 100px;
+        }
+        .infoList:hover{
+           border-left: #D96F32 5px solid;
+        }
+
+        .title{
+            font-size: 2vw;
+            margin: 0 0 0 4%;
+        }
+        .text{
+            font-size: 1vw;
+            margin: 1% 0 0 4%;
+        }
+
+    </style>
+</head>
+<body>
+<div class="searchBox">
+    <input class="search" name="print" onkeydown="searchKey()" type="text">
+    <div class="close_1"></div>
+    <div class="close_2"></div>
+    <div class="close_3"></div>
+    <p>Click icon to search</p>
+</div>
+<div class="infoBox">
+    <ul class="info">
+    </ul>
+</div>
+</body>
+<script type="text/javascript">
+    $(".close_1").hide();
+    $(".close_2").hide();
+    $(".infoBox").hide();
+    $(function () {
+        $(".search").click(function () {
+            $(".search").animate({"left": "-109px", "width": "250px"});
+            $(".close_1").show();
+            $(".close_2").show();
+            $(".close_3").hide();
+            $(".close_1").animate({"top": "17", "left": "240"});
+            $(".close_2").animate({"top": "17", "left": "240"});
+            $("p").hide(100);
+        }).focusout(function () {
+            $(".search").animate({"width": "12%", "left": "0px"});
+            $(".close_1").animate({"top": "10", "left": "280"});
+            $(".close_2").animate({"top": "-10", "left": "280"});
+            $(".close_1").hide();
+            $(".close_2").hide();
+            $(".close_3").show(600);
+            $("p").show(100);
+        });
+    });
+</script>
+<script type="text/javascript">
+    var inputValue;
+    function searchKey(){                //网页内按下回车触发
+        if(event.keyCode === 13)
+        {
+            $(".searchBox").animate({"margin": "3% auto 0"});
+            $(".infoBox").show(500);
+            inputValue = $(".search").val();
+            $.ajax({
+                url: 'https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=' + inputValue,
+                type: 'post',
+                dataType: 'jsonp',
+                data: {
+                    search:inputValue
+                },
+                success: function (data) {
+                    var pages =data.query.pages;
+                    var keyAry = [];
+                    var valueAry = [];
+                    for(var key in pages){
+                        keyAry.push(key);
+                        valueAry.push(pages[key]);
+                    }
+                    for(var i = 0;i < keyAry.length;i++){
+                        $(".info").append("<li class='infoList'><p class='title' id='code"+i+"'></p><p class='text' id='code"+i+"_dep'></p></li>");
+                        $("#code"+ i +"").append(pages[keyAry[i]].title);
+                        $("#code"+ i +"_dep").append(pages[keyAry[i]].extract);
+                    }
+                }
+            });
+
+        }
+    }
+</script>
+<script>
+
+</script>
+</html>
