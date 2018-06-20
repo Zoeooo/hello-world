@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>douyu</title>
+    <script src="jquery-1.10.2.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+    jQuery.getJSON("http://open.douyucdn.cn/api/RoomApi/game",function(data){
+    console.log(data)
+    })
+
+    // $.ajax({
+    //     url: 'http://open.douyucdn.cn/api/RoomApi/game',
+    //     type: 'get',
+    //     dataType: 'jsonp',
+    //     async:true,
+    //     crossDomain: true,
+    //     contentType: "application/json",
+    //     data: {
+    //     },
+    //     success: function (data) {
+    //         console.log(data);
+    //     }
+    // });
+
+</script>
+</html>
