@@ -3,29 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <title>douyu</title>
-    <script src="jquery-1.10.2.js"></script>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- 可选的Bootstrap主题文件（一般不使用） -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #5cb85c;
+        }
+
+        .app {
+            width: 400px;
+            height: 620px;
+            background-color: #fff;
+            margin: 10px auto 0;
+            border:10px seagreen solid;
+        }
+
+        /*.conZoe {*/
+            /*height: 400px;*/
+            /*background-color: #4fcb71;*/
+            /*!*margin: 5% auto 5%;*!*/
+        /*}*/
+        .ulZoe{
+            width: 55px;
+            background-color: #333;
+            height: 600px;
+            margin: 0;
+            padding: 0;
+        }
+        .ulZoe li{
+            list-style: none;
+            left: -30px;
+            width: 55px;
+            height: 200px;
+            padding: 50px 17px;
+            font-size: 18px;
+            color: white;
+        }
+        .ulZoe li:hover{
+            background-color: #5cb85c;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
+<div class="app">
+    <ul class="ulZoe">
+        <li class="all">全部主播</li>
+        <li class="online">在线主播</li>
+        <li class="offline">离线主播</li>
+    </ul>
+</div>
 
 </body>
 <script>
-    jQuery.getJSON("http://open.douyucdn.cn/api/RoomApi/game",function(data){
-    console.log(data)
-    })
-
-    // $.ajax({
-    //     url: 'http://open.douyucdn.cn/api/RoomApi/game',
-    //     type: 'get',
-    //     dataType: 'jsonp',
-    //     async:true,
-    //     crossDomain: true,
-    //     contentType: "application/json",
-    //     data: {
-    //     },
-    //     success: function (data) {
-    //         console.log(data);
-    //     }
-    // });
+    $.ajax({
+        url: 'http://open.douyucdn.cn/api/RoomApi/game',
+        type: 'get',
+        dataType: 'jsonp',
+        async: true,
+        crossDomain: true,
+        contentType: "application/json",
+        data: {},
+        success: function (data) {
+            console.log(data);
+        }
+    });
 
 </script>
 </html>
