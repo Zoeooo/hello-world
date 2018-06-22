@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>douyu</title>
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -16,65 +18,204 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
         body {
+            width: 100%;
+            height: 100%;
             margin: 0;
             padding: 0;
-            background-color: #5cb85c;
+            background-color: #fff;
+        }
+
+        a {
+            color: white;
+            text-underline: none;
+        }
+
+        a:hover {
+            color: white;
+            text-underline: none;
         }
 
         .app {
-            width: 400px;
-            height: 620px;
-            background-color: #fff;
-            margin: 10px auto 0;
-            border:10px seagreen solid;
-        }
-
-        /*.conZoe {*/
-            /*height: 400px;*/
-            /*background-color: #4fcb71;*/
-            /*!*margin: 5% auto 5%;*!*/
-        /*}*/
-        .ulZoe{
-            width: 55px;
-            background-color: #333;
-            height: 600px;
+            width: 100%;
+            height: 100%;
             margin: 0;
             padding: 0;
+            background-color: #fff;
         }
-        .ulZoe li{
+
+        .ulZoe {
+            width: 15%;
+            background-color: #333;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: block;
+            float: left;
+        }
+
+        .ulZoe li {
             list-style: none;
-            left: -30px;
-            width: 55px;
-            height: 200px;
+            width: 100%;
+            height: 33.33%;
             padding: 50px 17px;
             font-size: 18px;
             color: white;
         }
-        .ulZoe li:hover{
-            background-color: #5cb85c;
-            color: #333;
+
+        .san {
+            position: relative;
+            float: right;
+            top: 60px;
+            left: 27px;
+            width: 0;
+            height: 0;
+            border-top: 20px solid transparent;
+            border-left: 20px solid #fff;
+            transform: rotate(45deg);
         }
+
+        .art #QB {
+            position: absolute;
+            left: 15%;
+            width: 85%;
+            height: 100%;
+            margin: 0;
+            padding: 5% 0 10%;
+            background-color: #ff9d33;
+            overflow: scroll;
+        }
+
+        .art #ZX {
+            position: absolute;
+            left: 15%;
+            width: 85%;
+            height: 100%;
+            margin: 0;
+            background-color: #70a2ff;
+            overflow: scroll;
+            padding: 5% 0 10%;
+        }
+
+        .art #LX {
+            position: absolute;
+            left: 15%;
+            width: 85%;
+            height: 100%;
+            margin: 0;
+            background-color: #ce8483;
+            overflow: scroll;
+            padding: 5% 0 10%;
+        }
+
+        .list {
+            height: 25%;
+            width: 80%;
+            margin: 5% 10% 0;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+
     </style>
 </head>
 <body>
 <div class="app">
     <ul class="ulZoe">
-        <li class="all">全部主播</li>
-        <li class="online">在线主播</li>
-        <li class="offline">离线主播</li>
+        <a class="li1" href="#QB">
+            <li class="all">
+                <div class="san"></div>
+                全部主播
+            </li>
+        </a>
+        <a class="li2" href="#QB">
+            <li class="online">
+                <div class="san"></div>
+                在线主播
+            </li>
+        </a>
+        <a class="li3" href="#QB">
+            <li class="offline">
+                <div class="san"></div>
+                离线主播
+            </li>
+        </a>
     </ul>
+    <div class="art">
+        <div id="QB">
+            <div class="list listAll"></div>
+            <div class="list listAll"></div>
+            <div class="list listAll"></div>
+            <div class="list listAll"></div>
+            <div class="list listAll"></div>
+            <div class="list listAll"></div>
+        </div>
+        <div id="ZX">
+            <div class="list listOn"></div>
+            <div class="list listOn"></div>
+            <div class="list listOn"></div>
+            <div class="list listOn"></div>
+            <div class="list listOn"></div>
+            <div class="list listOn"></div>
+        </div>
+        <div id="LX">
+            <div class="list listOff"></div>
+            <div class="list listOff"></div>
+            <div class="list listOff"></div>
+            <div class="list listOff"></div>
+            <div class="list listOff"></div>
+            <div class="list listOff"></div>
+        </div>
+    </div>
 </div>
 
 </body>
 <script>
+    $("body").css({"height": window.screen.height + "px", "width": window.screen.width + "px"});
+    $("#ZX").hide();
+    $("#LX").hide();
+    $("#QB").show();
+    $(".li2 .san").hide();
+    $(".li3 .san").hide();
+    $(".li1 .san").show();
+    $(".li1 .san").css("border-left", " 20px solid #ff9d33");
+    $(".li1").click(function () {
+        $(".san").hide();
+        $("#ZX").hide();
+        $("#LX").hide();
+        $("#QB").show();
+        $(".li1 .san").css("border-left", " 20px solid #ff9d33");
+        $(".li1 .san").show();
+        $(".li2 .san").hide();
+        $(".li3 .san").hide();
+    })
+    $(".li2").click(function () {
+        $("#LX").hide();
+        $("#ZX").show();
+        $("#QB").hide();
+        $(".li1 .san").hide();
+        $(".li2 .san").show();
+        $(".li3 .san").hide();
+        $(".li2 .san").css("border-left", " 20px solid #70a2ff");
+    })
+    $(".li3").click(function () {
+        $("#ZX").hide();
+        $("#QB").hide();
+        $("#LX").show();
+        $(".li1 .san").hide();
+        $(".li2 .san").hide();
+        $(".li3 .san").show();
+        $(".li3 .san").css("border-left", " 20px solid #ce8483");
+
+    })
+</script>
+<script>
+    var data;
     $.ajax({
-        url: 'http://open.douyucdn.cn/api/RoomApi/game',
+        url: 'https://api.twitch.tv/helix/clips?id=AwkwardHelplessSalamanderSwiftRage',
         type: 'get',
         dataType: 'jsonp',
-        async: true,
-        crossDomain: true,
-        contentType: "application/json",
-        data: {},
+        data:{
+
+        },
         success: function (data) {
             console.log(data);
         }
