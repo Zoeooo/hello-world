@@ -3,36 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Baidu Viewer</title>
-    <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
-<div class="infoBox">
-    <ul class="info">
-    </ul>
-</div>
-<button onclick="searchKey()">生成</button>
-<input type="number">
-<input type="week">
-<input type="url">
-<input type="email">
-<input type="telephone">
-<input type="date">
-<input type="search">
-<input type="range">
+
+
 </body>
 <script type="text/javascript">
-    function searchKey() {                //网页内按下回车触发
-        var keyAry = [1, 2, 3, 4, 5, 6, 7, 8];
-        for (var i = 0; i < keyAry.length; i++) {
-            $(".info").append("<li class='infoList' id='i'>123123</li>");
-            console.log(i);
+    function diff(arr1, arr2) {
+        var newArr = [];
+        var max = arr1.length > arr2.length ? arr1.length : arr2.length;
+        var min = arr1.length < arr2.length ? arr1.length : arr2.length;
+        for (var i = 0; i < max; i++) {
+            for(var j = 0;j < min;j++){
+                if(arr1.length > arr2.length ? arr1: arr2[i] === arr1.length < arr2.length ? arr1: arr2[j]){
+                    console.log(i);
+                }
+            }
+
+            // return newArr;
         }
     }
+
+    diff([1, 2, 3, 5], [1, 2, 3, 4, 5]);
 
 </script>
 
